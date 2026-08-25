@@ -194,7 +194,7 @@ footer a:hover{text-decoration:underline}
 </style>
 <script>
 /* Apply the remembered theme before first paint, so there is no flash of the
-   wrong palette. Shares its storage key with the revision page. */
+   wrong palette. This page only — the revision page is light-only. */
 try {
   var t = localStorage.getItem('isc-maths-theme');
   if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
@@ -260,13 +260,17 @@ try {
   <ul class="sets">
     <li>
       <a class="set" href="First-Term-Revision-Learn.html">
-        <span class="kicker">Learn &middot; solutions hidden until you ask</span>
+        <span class="kicker">Slide show &middot; one problem at a time</span>
         <h2>First Term Revision <span class="go">Open &rarr;</span></h2>
-        <p>Ninety worked problems over the nine First Term chapters, each tagged with its
-        marks and its source. Every solution sits behind a <i>Show solution</i> button, with
-        <i>reveal chapter</i> and <i>reveal all</i> when you want them. Solutions carry an
-        <b>Answer</b> line, a <b>Note</b> on method, and a <b>Trap</b> naming the specific
-        error the examiner is testing for.</p>
+        <p>A <b>slide show</b>: one problem at a time, moved with <i>Previous</i> and
+        <i>Next</i>, and a title slide announcing each new chapter &mdash; each chapter
+        with its own accent colour and its own slide template, so you always know where
+        you are. Ninety worked problems
+        over the nine First Term chapters, each tagged with its marks and its source. Every
+        solution sits behind a <i>Show solution</i> button, and <i>Show hint</i> gives
+        the method for that whole type of problem without giving away the one in front of
+        you. Solutions carry an <b>Answer</b> line, a <b>Note</b> on method, and a
+        <b>Trap</b> naming the specific error the examiner is testing for.</p>
         <!-- Counts below are the real per-chapter totals; recompute with
              python3 src/build_revision.py, which prints the totals it wrote. -->
         <div class="chips">
@@ -284,7 +288,9 @@ try {
           <span><b>90</b> problems</span> <span class="sep">&middot;</span>
           <span><b>34</b> problem types</span> <span class="sep">&middot;</span>
           <span><b>9</b> chapters</span> <span class="sep">&middot;</span>
+          <span><b>101</b> slides</span> <span class="sep">&middot;</span>
           <span>no clock, no score</span> <span class="sep">&middot;</span>
+          <span>remembers your place</span> <span class="sep">&middot;</span>
           <span>printing reveals everything</span>
         </p>
       </a>
@@ -460,8 +466,8 @@ try {
 </footer>
 
 <script>
-/* Remember the reader's light / dark choice across this page and the revision
-   page. The stored value is applied by the small script in <head>. */
+/* Remember the reader's light / dark choice for this page. The revision page
+   is deliberately light-only, so nothing is shared with it. */
 var KEY = 'isc-maths-theme';
 function save(v){ try { localStorage.setItem(KEY, v); } catch(e){} }
 
