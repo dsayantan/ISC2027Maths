@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Integration by Parts &mdash; every occurrence in the ISC papers</title>
+<style>
+:root{
+  --bg:#EEF1F6; --surface:#FFFFFF; --surface-2:#F6F8FC; --surface-3:#EAEFF7;
+  --ink:#151B26; --muted:#5A6577; --rule:#D5DCE7; --rule-strong:#A3AFC2;
+  --accent:#2A4B8D; --accent-soft:#DFE7F6; --accent-ink:#1D3667;
+  --warm:#8A5A12; --warm-soft:#FBF0DC; --warm-rule:#E7D2AC;
+  --ok:#186B45; --ok-soft:#DDF0E6; --ok-rule:#AFD9C2;
+  --shadow:0 1px 2px rgba(21,27,38,.05), 0 10px 30px -22px rgba(21,27,38,.45);
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,"Times New Roman",serif;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+     font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%}
+.wrap{max-width:54rem;margin:0 auto;padding:0 1.15rem 5rem}
+header.mast{padding:2.6rem 0 1.3rem;border-bottom:1px solid var(--rule);margin-bottom:1.5rem}
+.kicker{font-size:.71rem;letter-spacing:.13em;text-transform:uppercase;
+        color:var(--warm);font-weight:650;margin:0 0 .7rem}
+h1{font-family:var(--serif);font-size:clamp(1.7rem,4.6vw,2.45rem);line-height:1.15;
+   margin:0 0 .6rem;color:var(--accent-ink);font-weight:700;letter-spacing:-.012em}
+.sub{color:var(--muted);margin:0;max-width:46rem}
+.statrow{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem}
+.stat{background:var(--surface);border:1px solid var(--rule);border-radius:9px;
+      padding:.5rem .8rem;box-shadow:var(--shadow)}
+.stat b{display:block;font-family:var(--serif);font-size:1.2rem;color:var(--accent);line-height:1.15}
+.stat span{font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+h2.sec{font-family:var(--serif);font-size:1.35rem;margin:2.4rem 0 .3rem;
+       color:var(--accent-ink);border-bottom:2px solid var(--accent);padding-bottom:.4rem}
+.lead{color:var(--muted);font-size:.94rem;margin:.7rem 0 1.1rem;max-width:46rem}
+.panel{background:var(--surface);border:1px solid var(--rule);border-radius:12px;
+       padding:1rem 1.15rem;margin:1.1rem 0;box-shadow:var(--shadow)}
+.panel.warm{background:var(--warm-soft);border-color:var(--warm-rule)}
+.panel h3{font-size:.9rem;margin:0 0 .5rem;color:var(--warm);font-weight:700}
+.panel ul{margin:.3rem 0 0;padding-left:1.15rem}
+.panel li{margin:.35rem 0;font-size:.93rem}
+.item{background:var(--surface);border:1px solid var(--rule);border-radius:11px;
+      padding:.9rem 1.05rem 1rem;margin:.7rem 0;box-shadow:var(--shadow)}
+.imeta{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.55rem}
+.n{font-family:var(--mono);font-size:.72rem;font-weight:700;color:#fff;
+   background:var(--accent);border-radius:5px;padding:.1rem .42rem}
+.src{font-size:.86rem;font-weight:650;color:var(--accent-ink)}
+.qn{font-size:.8rem;color:var(--muted)}
+.mk{font-size:.7rem;color:var(--accent-ink);background:var(--accent-soft);
+    border-radius:999px;padding:.1rem .5rem;font-weight:650;margin-left:auto}
+.themath{font-size:1.1rem;padding:.55rem 0 .3rem;font-family:var(--serif)}
+button.rev{font:inherit;font-size:.8rem;cursor:pointer;border-radius:8px;
+           border:1px solid var(--rule-strong);background:var(--surface);
+           color:var(--ink);padding:.34rem .8rem;margin-top:.35rem}
+button.rev:hover{border-color:var(--accent);color:var(--accent)}
+.reveal{display:none;margin-top:.7rem;padding-top:.7rem;border-top:1px dashed var(--rule-strong)}
+.item.open .reveal{display:block}
+.note{font-size:.9rem;margin:0 0 .7rem;padding:.5rem .7rem;border-radius:8px;
+      background:var(--surface-2);border:1px solid var(--rule);color:var(--muted)}
+.note .lbl{color:var(--muted)}
+ol.steps{margin:.2rem 0 .8rem;padding-left:1.35rem;font-size:.94rem}
+ol.steps li{margin:.5rem 0}
+.disp{text-align:center;margin:.6rem 0;font-family:var(--serif);font-size:1.03em;overflow-x:auto}
+.n.warm{background:var(--warm)}
+.item.nm{border-left:3px solid var(--warm)}
+.meth{font-size:.92rem;margin:0 0 .55rem}
+.meth .lbl,.ansl .lbl,.note .lbl{font-size:.63rem;letter-spacing:.1em;
+      text-transform:uppercase;font-weight:700;margin-right:.5rem}
+.meth .lbl{color:var(--accent)}
+.ansl{background:var(--ok-soft);border:1px solid var(--ok-rule);border-radius:8px;
+      padding:.5rem .7rem;font-size:.95rem;margin:0}
+.ansl .lbl{color:var(--ok)}
+
+.tw{overflow-x:auto;margin:.8rem 0}
+table{border-collapse:collapse;font-size:.86rem;width:100%;min-width:34rem}
+th,td{border:1px solid var(--rule);padding:.34rem .6rem;text-align:left;vertical-align:top}
+th{background:var(--accent);color:#fff;font-size:.76rem;letter-spacing:.03em}
+tbody tr:nth-child(even){background:var(--surface-2)}
+td.grp{font-weight:650;color:var(--accent-ink)}
+td.c{text-align:center}
+.controls{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0 0}
+button.big{font:inherit;font-size:.84rem;cursor:pointer;border-radius:9px;
+           padding:.42rem .9rem;border:1px solid var(--accent);background:var(--accent);color:#fff}
+button.big.ghost{background:var(--surface);color:var(--ink);border-color:var(--rule-strong)}
+footer{margin-top:3rem;padding-top:1.1rem;border-top:1px solid var(--rule);
+       font-size:.8rem;color:var(--muted)}
+footer p{margin:.4rem 0;max-width:48rem}
+code{font-family:var(--mono);font-size:.9em;background:var(--surface-2);
+     border:1px solid var(--rule);border-radius:3px;padding:.06em .32em}
+.fr{display:inline-block;vertical-align:middle;text-align:center;font-size:.92em;margin:0 .16em;line-height:1.22}
+.fr .n2{display:block}
+.fr .n{display:block;border-bottom:1px solid currentColor;padding:0 .26em;
+       font-family:inherit;font-size:1em;font-weight:inherit;color:inherit;background:none}
+.fr .d{display:block;padding:0 .26em}
+.rt{white-space:nowrap}
+.rt .bar{border-top:1px solid currentColor;padding:0 .14em 0 .05em;margin-left:-.03em}
+.ig{display:inline-flex;align-items:center;vertical-align:middle;gap:.06em}
+.ig .sym{font-size:1.5em;line-height:.85;font-family:var(--serif)}
+.ig .lim{display:inline-flex;flex-direction:column;font-size:.6em;line-height:1.15;margin:0 .1em 0 -.1em}
+.ig .hi{margin-bottom:.75em}
+.ig .lo{margin-top:-.75em}
+sup,sub{font-size:.72em;line-height:0}
+@media print{
+  body{background:#fff}
+  button{display:none!important}
+  .item .reveal{display:block!important}
+  .item,.panel{box-shadow:none;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <p class="kicker">ISC Class 12 Mathematics &middot; Integrals &middot; sourced from the papers</p>
+  <h1>Integration by Parts</h1>
+  <p class="sub">Every integration-by-parts problem that has appeared in any question
+  paper held in this folder &mdash; ISC board papers, ISC specimen papers, the Heritage
+  School papers and the CISCE competency booklet. Each one carries its source, its
+  marks, the method and the answer.</p>
+  <div class="statrow">
+    <div class="stat"><b>13</b><span>classic by parts</span></div>
+    <div class="stat"><b>4</b><span>e<sup>x</sup>(f + f&prime;) form</span></div>
+    <div class="stat"><b>17</b><span>problems in all</span></div>
+    <div class="stat"><b>23</b><span>papers searched</span></div>
+  </div>
+  <div class="controls">
+    <button class="big" id="all">Show all solutions</button>
+    <button class="big ghost" id="none">Hide all</button>
+  </div>
+</header>
+
+<div class="panel warm">
+  <h3>What the list tells you about how ISC sets this topic</h3>
+  <ul>
+    <li><b>It is worth 1 to 6 marks and appears in most years</b> &mdash; 17 problems
+        across 23 papers. Never skip it.</li>
+    <li><b>Inverse trigonometric integrands dominate.</b> Five of the thirteen classic
+        problems have tan<sup>&minus;1</sup> in them, and
+        <span class="ig"><span class="sym">&int;</span><span class="body">tan<sup>&minus;1</sup><span class="rt">&radic;<span class="bar">x</span></span> dx</span></span> is set <b>twice</b> &mdash; Board 2018 Q7 and Specimen 2021 Q12(a),
+        identical, for 4 marks and then 6.</li>
+    <li><b>Logarithms are the other half.</b> <span class="ig"><span class="sym">&int;</span><span class="body">log x dx</span></span> in four different disguises:
+        log<sub>10</sub>x, log 2x, ln x and (log x)<sup>2</sup>.</li>
+    <li><b>Learn the e<sup>x</sup>(f + f&prime;) result cold.</b> Four of the seventeen
+        are that one identity, and every one of them is a 1&ndash;2 mark question you
+        should finish in under a minute.</li>
+    <li><b>Simplify before you reach for parts.</b> Two problems here
+        (Board 2020 Q13(a), Specimen 2027 Q18(i)(b)) only need parts <i>after</i> a
+        simplification or substitution, and six more look like parts but are not
+        &mdash; see the last section.</li>
+  </ul>
+</div>
+
+<h2 class="sec">Classic integration by parts</h2>
+<p class="lead">&int;u dv = uv &minus; &int;v du, choosing u by <b>ILATE</b>:
+Inverse, Logarithmic, Algebraic, Trigonometric, Exponential &mdash; whichever comes
+first is u.</p>
+<div class="item">
+  <div class="imeta"><span class="n">1</span>
+    <span class="src">ISC Board 2018</span><span class="qn">Question 7</span>
+    <span class="mk">4 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body">tan<sup>&minus;1</sup><span class="rt">&radic;<span class="bar">x</span></span> dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Note</span>Set again, word for word, as Specimen 2021 Q12(a) &mdash; the most repeated by-parts question in the collection.</p><ol class="steps"><li>Take u = tan<sup>&minus;1</sup><span class="rt">&radic;<span class="bar">x</span></span> and dv = dx, so v = x and<div class="disp">du = <span class="fr"><span class="n">1</span><span class="d">1 + x</span></span> &middot; <span class="fr"><span class="n">1</span><span class="d">2<span class="rt">&radic;<span class="bar">x</span></span></span></span> dx = <span class="fr"><span class="n">dx</span><span class="d">2<span class="rt">&radic;<span class="bar">x</span></span>(1 + x)</span></span></div></li><li>Applying &int;u dv = uv &minus; &int;v du:<div class="disp">I = x tan<sup>&minus;1</sup><span class="rt">&radic;<span class="bar">x</span></span> &minus; <span class="fr"><span class="n">1</span><span class="d">2</span></span> <span class="ig"><span class="sym">&int;</span><span class="body"><span class="fr"><span class="n"><span class="rt">&radic;<span class="bar">x</span></span></span><span class="d">1 + x</span></span> dx</span></span></div></li><li>For the remaining integral put t = <span class="rt">&radic;<span class="bar">x</span></span>, so x = t<sup>2</sup> and dx = 2t dt:<div class="disp"><span class="ig"><span class="sym">&int;</span><span class="body"><span class="fr"><span class="n"><span class="rt">&radic;<span class="bar">x</span></span></span><span class="d">1 + x</span></span> dx</span></span> = <span class="ig"><span class="sym">&int;</span><span class="body"><span class="fr"><span class="n">2t<sup>2</sup></span><span class="d">1 + t<sup>2</sup></span></span> dt</span></span> = 2<span class="ig"><span class="sym">&int;</span><span class="body">(1 &minus; <span class="fr"><span class="n">1</span><span class="d">1 + t<sup>2</sup></span></span>) dt</span></span> = 2t &minus; 2 tan<sup>&minus;1</sup>t</div></li><li>That is 2<span class="rt">&radic;<span class="bar">x</span></span> &minus; 2 tan<sup>&minus;1</sup><span class="rt">&radic;<span class="bar">x</span></span>. Substituting back,<div class="disp">I = x tan<sup>&minus;1</sup><span class="rt">&radic;<span class="bar">x</span></span> &minus; <span class="fr"><span class="n">1</span><span class="d">2</span></span>(2<span class="rt">&radic;<span class="bar">x</span></span> &minus; 2 tan<sup>&minus;1</sup><span class="rt">&radic;<span class="bar">x</span></span>)</div></li></ol><p class="ansl"><span class="lbl">Answer</span>(x + 1) tan<sup>&minus;1</sup><span class="rt">&radic;<span class="bar">x</span></span> &minus; <span class="rt">&radic;<span class="bar">x</span></span> + C</p></div>
+</div><div class="item">
+  <div class="imeta"><span class="n">2</span>
+    <span class="src">ISC Board 2020</span><span class="qn">Question 13(a)</span>
+    <span class="mk">6 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body">tan<sup>&minus;1</sup><span class="fr"><span class="n">1 &minus; x</span><span class="d">1 + x</span></span> dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Note</span>The marks are for spotting the simplification. Going straight to parts on the original integrand is far messier.</p><ol class="steps"><li><b>Simplify first.</b> Using tan<sup>&minus;1</sup>a &minus; tan<sup>&minus;1</sup>b = tan<sup>&minus;1</sup><span class="fr"><span class="n">a &minus; b</span><span class="d">1 + ab</span></span> with a = 1:<div class="disp">tan<sup>&minus;1</sup><span class="fr"><span class="n">1 &minus; x</span><span class="d">1 + x</span></span> = tan<sup>&minus;1</sup>1 &minus; tan<sup>&minus;1</sup>x = <span class="fr"><span class="n">&pi;</span><span class="d">4</span></span> &minus; tan<sup>&minus;1</sup>x&nbsp;&nbsp;(x &gt; &minus;1)</div></li><li>So I = <span class="fr"><span class="n">&pi;x</span><span class="d">4</span></span> &minus; J, where J = <span class="ig"><span class="sym">&int;</span><span class="body">tan<sup>&minus;1</sup>x dx</span></span>.</li><li><b>Now parts on J only.</b> u = tan<sup>&minus;1</sup>x, dv = dx, v = x:<div class="disp">J = x tan<sup>&minus;1</sup>x &minus; <span class="ig"><span class="sym">&int;</span><span class="body"><span class="fr"><span class="n">x</span><span class="d">1 + x<sup>2</sup></span></span> dx</span></span> = x tan<sup>&minus;1</sup>x &minus; <span class="fr"><span class="n">1</span><span class="d">2</span></span> log(1 + x<sup>2</sup>)</div></li><li>Therefore I = <span class="fr"><span class="n">&pi;x</span><span class="d">4</span></span> &minus; x tan<sup>&minus;1</sup>x + <span class="fr"><span class="n">1</span><span class="d">2</span></span> log(1 + x<sup>2</sup>).</li></ol><p class="ansl"><span class="lbl">Answer</span><span class="fr"><span class="n">&pi;x</span><span class="d">4</span></span> &minus; x tan<sup>&minus;1</sup>x + <span class="fr"><span class="n">1</span><span class="d">2</span></span> log(1 + x<sup>2</sup>) + C</p></div>
+</div><div class="item">
+  <div class="imeta"><span class="n">3</span>
+    <span class="src">ISC Board 2024</span><span class="qn">Question 9(i)</span>
+    <span class="mk">4 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body">x<sup>2</sup> cos x dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Note</span>The standard two-application case. Keep the sign of v straight: &int;cos x dx = sin x but &int;sin x dx = &minus;cos x.</p><ol class="steps"><li>ILATE puts the algebraic factor first: u = x<sup>2</sup>, dv = cos x dx, v = sin x.<div class="disp">I = x<sup>2</sup> sin x &minus; <span class="ig"><span class="sym">&int;</span><span class="body">2x sin x dx</span></span></div></li><li><b>Apply parts a second time</b> to <span class="ig"><span class="sym">&int;</span><span class="body">2x sin x dx</span></span>, with u = 2x, dv = sin x dx, v = &minus;cos x:<div class="disp"><span class="ig"><span class="sym">&int;</span><span class="body">2x sin x dx</span></span> = &minus;2x cos x + <span class="ig"><span class="sym">&int;</span><span class="body">2 cos x dx</span></span> = &minus;2x cos x + 2 sin x</div></li><li>Substituting back:<div class="disp">I = x<sup>2</sup> sin x &minus; (&minus;2x cos x + 2 sin x)</div></li></ol><p class="ansl"><span class="lbl">Answer</span>x<sup>2</sup> sin x + 2x cos x &minus; 2 sin x + C</p></div>
+</div><div class="item">
+  <div class="imeta"><span class="n">4</span>
+    <span class="src">ISC Board 2025</span><span class="qn">Question 8(ii)</span>
+    <span class="mk">4 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body">(log x)<sup>2</sup> dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Note</span>There is no second factor, so take dv = dx. The same trick handles &int;log x dx, &int;sin<sup>&minus;1</sup>x dx and &int;tan<sup>&minus;1</sup>x dx.</p><ol class="steps"><li>Write the integrand as (log x)<sup>2</sup> &middot; 1 and take u = (log x)<sup>2</sup>, dv = dx, v = x. Then du = 2 log x &middot; <span class="fr"><span class="n">1</span><span class="d">x</span></span> dx.<div class="disp">I = x(log x)<sup>2</sup> &minus; <span class="ig"><span class="sym">&int;</span><span class="body">x &middot; 2 log x &middot; <span class="fr"><span class="n">1</span><span class="d">x</span></span> dx</span></span> = x(log x)<sup>2</sup> &minus; 2<span class="ig"><span class="sym">&int;</span><span class="body">log x dx</span></span></div></li><li><b>Parts again</b> on <span class="ig"><span class="sym">&int;</span><span class="body">log x dx</span></span>, with u = log x, dv = dx, v = x:<div class="disp"><span class="ig"><span class="sym">&int;</span><span class="body">log x dx</span></span> = x log x &minus; <span class="ig"><span class="sym">&int;</span><span class="body">x &middot; <span class="fr"><span class="n">1</span><span class="d">x</span></span> dx</span></span> = x log x &minus; x</div></li><li>Therefore I = x(log x)<sup>2</sup> &minus; 2(x log x &minus; x).</li></ol><p class="ansl"><span class="lbl">Answer</span>x[(log x)<sup>2</sup> &minus; 2 log x + 2] + C</p></div>
+</div><div class="item">
+  <div class="imeta"><span class="n">5</span>
+    <span class="src">ISC Board 2025 Improvement</span><span class="qn">Question 9(i)</span>
+    <span class="mk">4 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body">x tan<sup>&minus;1</sup>x dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Note</span>ILATE overrides the instinct to take u = x: the <b>I</b>nverse function comes first.</p><ol class="steps"><li>u = tan<sup>&minus;1</sup>x, dv = x dx, so v = <span class="fr"><span class="n">x<sup>2</sup></span><span class="d">2</span></span> and du = <span class="fr"><span class="n">dx</span><span class="d">1 + x<sup>2</sup></span></span>.<div class="disp">I = <span class="fr"><span class="n">x<sup>2</sup></span><span class="d">2</span></span> tan<sup>&minus;1</sup>x &minus; <span class="fr"><span class="n">1</span><span class="d">2</span></span> <span class="ig"><span class="sym">&int;</span><span class="body"><span class="fr"><span class="n">x<sup>2</sup></span><span class="d">1 + x<sup>2</sup></span></span> dx</span></span></div></li><li>The remaining integrand is improper, so divide before integrating:<div class="disp"><span class="fr"><span class="n">x<sup>2</sup></span><span class="d">1 + x<sup>2</sup></span></span> = 1 &minus; <span class="fr"><span class="n">1</span><span class="d">1 + x<sup>2</sup></span></span>&nbsp;&nbsp;&#8658;&nbsp;&nbsp;<span class="ig"><span class="sym">&int;</span><span class="body"><span class="fr"><span class="n">x<sup>2</sup></span><span class="d">1 + x<sup>2</sup></span></span> dx</span></span> = x &minus; tan<sup>&minus;1</sup>x</div></li><li>Hence I = <span class="fr"><span class="n">x<sup>2</sup></span><span class="d">2</span></span> tan<sup>&minus;1</sup>x &minus; <span class="fr"><span class="n">1</span><span class="d">2</span></span>(x &minus; tan<sup>&minus;1</sup>x).</li></ol><p class="ansl"><span class="lbl">Answer</span><span class="fr"><span class="n">x<sup>2</sup></span><span class="d">2</span></span> tan<sup>&minus;1</sup>x &minus; <span class="fr"><span class="n">x</span><span class="d">2</span></span> + <span class="fr"><span class="n">1</span><span class="d">2</span></span> tan<sup>&minus;1</sup>x + C</p></div>
+</div><div class="item">
+  <div class="imeta"><span class="n">6</span>
+    <span class="src">ISC Specimen 2021</span><span class="qn">Question 12(a)</span>
+    <span class="mk">6 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body">tan<sup>&minus;1</sup><span class="rt">&radic;<span class="bar">x</span></span> dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Note</span>The same integral as Board 2018 Q7, three years earlier and worth 6 marks instead of 4. Solution identical &mdash; see problem 1.</p><ol class="steps"><li>u = tan<sup>&minus;1</sup><span class="rt">&radic;<span class="bar">x</span></span>, dv = dx, v = x, du = <span class="fr"><span class="n">dx</span><span class="d">2<span class="rt">&radic;<span class="bar">x</span></span>(1 + x)</span></span>.<div class="disp">I = x tan<sup>&minus;1</sup><span class="rt">&radic;<span class="bar">x</span></span> &minus; <span class="fr"><span class="n">1</span><span class="d">2</span></span> <span class="ig"><span class="sym">&int;</span><span class="body"><span class="fr"><span class="n"><span class="rt">&radic;<span class="bar">x</span></span></span><span class="d">1 + x</span></span> dx</span></span></div></li><li>With t = <span class="rt">&radic;<span class="bar">x</span></span> (so x = t<sup>2</sup>, dx = 2t dt) the remaining integral is 2t &minus; 2 tan<sup>&minus;1</sup>t = 2<span class="rt">&radic;<span class="bar">x</span></span> &minus; 2 tan<sup>&minus;1</sup><span class="rt">&radic;<span class="bar">x</span></span>.</li></ol><p class="ansl"><span class="lbl">Answer</span>(x + 1) tan<sup>&minus;1</sup><span class="rt">&radic;<span class="bar">x</span></span> &minus; <span class="rt">&radic;<span class="bar">x</span></span> + C</p></div>
+</div><div class="item">
+  <div class="imeta"><span class="n">7</span>
+    <span class="src">ISC Specimen 2022, Semester 2</span><span class="qn">Question 2(b)</span>
+    <span class="mk">2 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body">log<sub>10</sub> x dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Note</span>Change the base before doing anything else &mdash; parts works on the natural logarithm.</p><ol class="steps"><li>Change of base: log<sub>10</sub> x = <span class="fr"><span class="n">log x</span><span class="d">log 10</span></span>, and <span class="fr"><span class="n">1</span><span class="d">log 10</span></span> is a constant.<div class="disp">I = <span class="fr"><span class="n">1</span><span class="d">log 10</span></span> <span class="ig"><span class="sym">&int;</span><span class="body">log x dx</span></span></div></li><li>Parts with u = log x, dv = dx, v = x:<div class="disp"><span class="ig"><span class="sym">&int;</span><span class="body">log x dx</span></span> = x log x &minus; <span class="ig"><span class="sym">&int;</span><span class="body">x &middot; <span class="fr"><span class="n">1</span><span class="d">x</span></span> dx</span></span> = x log x &minus; x</div></li></ol><p class="ansl"><span class="lbl">Answer</span><span class="fr"><span class="n">x(log x &minus; 1)</span><span class="d">log 10</span></span> + C</p></div>
+</div><div class="item">
+  <div class="imeta"><span class="n">8</span>
+    <span class="src">ISC Specimen 2023</span><span class="qn">Question 1(xiii)</span>
+    <span class="mk">1 mark</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body">log 2x dx</span></span> = x log 2x &minus; k + C&nbsp;&nbsp;&mdash;&nbsp;find k</div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Note</span>A one-mark question that only asks for the <i>second</i> term of the by-parts formula.</p><ol class="steps"><li>u = log 2x, dv = dx, v = x. Note du = <span class="fr"><span class="n">1</span><span class="d">2x</span></span> &middot; 2 dx = <span class="fr"><span class="n">dx</span><span class="d">x</span></span>.<div class="disp">I = x log 2x &minus; <span class="ig"><span class="sym">&int;</span><span class="body">x &middot; <span class="fr"><span class="n">1</span><span class="d">x</span></span> dx</span></span> = x log 2x &minus; <span class="ig"><span class="sym">&int;</span><span class="body">1 dx</span></span></div></li><li>So the subtracted term is simply x.</li></ol><p class="ansl"><span class="lbl">Answer</span>k = x&nbsp;&nbsp;(so I = x log 2x &minus; x + C)</p></div>
+</div><div class="item">
+  <div class="imeta"><span class="n">9</span>
+    <span class="src">ISC Specimen 2023</span><span class="qn">Question 5(i)</span>
+    <span class="mk">2 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body">[sin(log x) + cos(log x)] dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Note</span>One of a family in which the second term is produced, and cancelled, by the by-parts step on the first.</p><ol class="steps"><li>Work on I<sub>1</sub> = <span class="ig"><span class="sym">&int;</span><span class="body">sin(log x) dx</span></span> with u = sin(log x), dv = dx, v = x:<div class="disp">I<sub>1</sub> = x sin(log x) &minus; <span class="ig"><span class="sym">&int;</span><span class="body">x &middot; cos(log x) &middot; <span class="fr"><span class="n">1</span><span class="d">x</span></span> dx</span></span> = x sin(log x) &minus; <span class="ig"><span class="sym">&int;</span><span class="body">cos(log x) dx</span></span></div></li><li>The original integral is I<sub>1</sub> + <span class="ig"><span class="sym">&int;</span><span class="body">cos(log x) dx</span></span>, so the two remaining integrals cancel exactly:<div class="disp">I = x sin(log x) &minus; <span class="ig"><span class="sym">&int;</span><span class="body">cos(log x) dx</span></span> + <span class="ig"><span class="sym">&int;</span><span class="body">cos(log x) dx</span></span> = x sin(log x)</div></li><li>Check by differentiating: <span class="fr"><span class="n">d</span><span class="d">dx</span></span>[x sin(log x)] = sin(log x) + cos(log x). &#10003;</li></ol><p class="ansl"><span class="lbl">Answer</span>x sin(log x) + C</p></div>
+</div><div class="item">
+  <div class="imeta"><span class="n">10</span>
+    <span class="src">ISC Specimen 2024</span><span class="qn">Question 5(ii)</span>
+    <span class="mk">2 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body">x e<sup>x</sup> dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Note</span>The textbook case, and the one to do first if you are relearning the method. From <code>2024-v2.pdf</code> &mdash; see the note on the duplicate file below.</p><ol class="steps"><li>ILATE: <b>A</b>lgebraic before <b>E</b>xponential, so u = x, dv = e<sup>x</sup> dx, v = e<sup>x</sup>.<div class="disp">I = x e<sup>x</sup> &minus; <span class="ig"><span class="sym">&int;</span><span class="body">e<sup>x</sup> dx</span></span> = x e<sup>x</sup> &minus; e<sup>x</sup></div></li></ol><p class="ansl"><span class="lbl">Answer</span>(x &minus; 1)e<sup>x</sup> + C</p></div>
+</div><div class="item">
+  <div class="imeta"><span class="n">11</span>
+    <span class="src">ISC Specimen 2027</span><span class="qn">Question 18(i)(a)</span>
+    <span class="mk">2 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body">ln x dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Note</span>Deliberately the first half of a two-part question &mdash; part (b) below reduces to exactly this.</p><ol class="steps"><li>Write ln x = ln x &middot; 1 and take u = ln x, dv = dx, v = x.<div class="disp">I = x ln x &minus; <span class="ig"><span class="sym">&int;</span><span class="body">x &middot; <span class="fr"><span class="n">1</span><span class="d">x</span></span> dx</span></span> = x ln x &minus; x</div></li></ol><p class="ansl"><span class="lbl">Answer</span>x(ln x &minus; 1) + C</p></div>
+</div><div class="item">
+  <div class="imeta"><span class="n">12</span>
+    <span class="src">ISC Specimen 2027</span><span class="qn">Question 18(i)(b)</span>
+    <span class="mk">3 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body"><span class="fr"><span class="n">ln[ln(<span class="fr"><span class="n">1 + x</span><span class="d">1 &minus; x</span></span>)]</span><span class="d">1 &minus; x<sup>2</sup></span></span> dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Note</span>The word <i>hence</i> in the question is the instruction: substitute so that part (a) finishes it.</p><ol class="steps"><li>Put t = ln<span class="fr"><span class="n">1 + x</span><span class="d">1 &minus; x</span></span> = ln(1 + x) &minus; ln(1 &minus; x). Then<div class="disp"><span class="fr"><span class="n">dt</span><span class="d">dx</span></span> = <span class="fr"><span class="n">1</span><span class="d">1 + x</span></span> + <span class="fr"><span class="n">1</span><span class="d">1 &minus; x</span></span> = <span class="fr"><span class="n">2</span><span class="d">1 &minus; x<sup>2</sup></span></span>&nbsp;&nbsp;&#8658;&nbsp;&nbsp;<span class="fr"><span class="n">dx</span><span class="d">1 &minus; x<sup>2</sup></span></span> = <span class="fr"><span class="n">dt</span><span class="d">2</span></span></div></li><li>The integral becomes, in t alone,<div class="disp">I = <span class="fr"><span class="n">1</span><span class="d">2</span></span> <span class="ig"><span class="sym">&int;</span><span class="body">ln t dt</span></span></div></li><li>which is part (a) with x replaced by t: <span class="fr"><span class="n">1</span><span class="d">2</span></span> t(ln t &minus; 1).</li></ol><p class="ansl"><span class="lbl">Answer</span><span class="fr"><span class="n">1</span><span class="d">2</span></span> t(ln t &minus; 1) + C, &nbsp;where t = ln<span class="fr"><span class="n">1 + x</span><span class="d">1 &minus; x</span></span></p></div>
+</div><div class="item">
+  <div class="imeta"><span class="n">13</span>
+    <span class="src">Heritage School Pre-Board 2016&ndash;17</span><span class="qn">Question 1(e)</span>
+    <span class="mk">3 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body"><span class="fr"><span class="n">x &minus; sin x</span><span class="d">1 &minus; cos x</span></span> dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Note</span>The prettiest one here: the integral thrown out by the by-parts step cancels the other half of the integrand exactly, leaving a one-term answer.</p><ol class="steps"><li>Half-angle identities first: 1 &minus; cos x = 2 sin<sup>2</sup>(x/2) and sin x = 2 sin(x/2) cos(x/2). So<div class="disp"><span class="fr"><span class="n">x &minus; sin x</span><span class="d">1 &minus; cos x</span></span> = <span class="fr"><span class="n">x</span><span class="d">2 sin<sup>2</sup>(x/2)</span></span> &minus; <span class="fr"><span class="n">cos(x/2)</span><span class="d">sin(x/2)</span></span> = <span class="fr"><span class="n">1</span><span class="d">2</span></span> x cosec<sup>2</sup>(x/2) &minus; cot(x/2)</div></li><li><b>Parts on the first piece only</b>, with u = x and dv = <span class="fr"><span class="n">1</span><span class="d">2</span></span> cosec<sup>2</sup>(x/2) dx, so v = &minus;cot(x/2):<div class="disp"><span class="fr"><span class="n">1</span><span class="d">2</span></span> <span class="ig"><span class="sym">&int;</span><span class="body">x cosec<sup>2</sup>(x/2) dx</span></span> = &minus;x cot(x/2) + <span class="ig"><span class="sym">&int;</span><span class="body">cot(x/2) dx</span></span></div></li><li>Now subtract the second piece of the integrand:<div class="disp">I = [&minus;x cot(x/2) + <span class="ig"><span class="sym">&int;</span><span class="body">cot(x/2) dx</span></span>] &minus; <span class="ig"><span class="sym">&int;</span><span class="body">cot(x/2) dx</span></span> = &minus;x cot(x/2)</div></li><li>The two cotangent integrals cancel, so no logarithm ever appears.</li></ol><p class="ansl"><span class="lbl">Answer</span>&minus;x cot(x/2) + C</p></div>
+</div>
+
+<h2 class="sec">The e<sup>x</sup>(f + f&prime;) standard form</h2>
+<p class="lead">&int;e<sup>x</sup>[f(x) + f&prime;(x)] dx = e<sup>x</sup>f(x) + c. It is
+<i>derived</i> by parts and is taught inside the by-parts section, but in the exam it is
+pattern recognition, not working. These four are all short objective questions.</p>
+<div class="item">
+  <div class="imeta"><span class="n">14</span>
+    <span class="src">ISC Specimen 2022, Semester 2</span><span class="qn">Question 1(iv)</span>
+    <span class="mk">1 mark</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body">e<sup>x</sup><span class="fr"><span class="n">x &minus; 1</span><span class="d">x<sup>2</sup></span></span> dx</span></span> = e<sup>x</sup>f(x) + C&nbsp;&nbsp;&mdash;&nbsp;find f(x)</div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><ol class="steps"><li>Split the fraction so the pattern shows:<div class="disp"><span class="fr"><span class="n">x &minus; 1</span><span class="d">x<sup>2</sup></span></span> = <span class="fr"><span class="n">1</span><span class="d">x</span></span> &minus; <span class="fr"><span class="n">1</span><span class="d">x<sup>2</sup></span></span></div></li><li>Take f(x) = <span class="fr"><span class="n">1</span><span class="d">x</span></span>. Then f&prime;(x) = &minus;<span class="fr"><span class="n">1</span><span class="d">x<sup>2</sup></span></span> and<div class="disp">f(x) + f&prime;(x) = <span class="fr"><span class="n">1</span><span class="d">x</span></span> &minus; <span class="fr"><span class="n">1</span><span class="d">x<sup>2</sup></span></span> &nbsp;&#10003;</div></li><li>By the identity, the integral is e<sup>x</sup> f(x) + C.</li></ol><p class="ansl"><span class="lbl">Answer</span>f(x) = <span class="fr"><span class="n">1</span><span class="d">x</span></span></p></div>
+</div><div class="item">
+  <div class="imeta"><span class="n">15</span>
+    <span class="src">ISC Specimen 2025</span><span class="qn">Question 5(ii)</span>
+    <span class="mk">2 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body">e<sup>x</sup> cosec x (1 &minus; cot x) dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><ol class="steps"><li>Expand the bracket:<div class="disp">e<sup>x</sup> cosec x (1 &minus; cot x) = e<sup>x</sup>[cosec x &minus; cosec x cot x]</div></li><li>Recognise f(x) = cosec x, since <span class="fr"><span class="n">d</span><span class="d">dx</span></span>(cosec x) = &minus;cosec x cot x, so the bracket is exactly f(x) + f&prime;(x).</li></ol><p class="ansl"><span class="lbl">Answer</span>e<sup>x</sup> cosec x + C</p></div>
+</div><div class="item">
+  <div class="imeta"><span class="n">16</span>
+    <span class="src">CISCE Competency booklet</span><span class="qn">Question 10</span>
+    <span class="mk">1 mark</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body"><span class="fr"><span class="n">2 &minus; x</span><span class="d">(x &minus; 1)<sup>2</sup></span></span> e<sup>x</sup> dx</span></span> = e<sup>x</sup>f(x) + C&nbsp;&nbsp;&mdash;&nbsp;find f(x)</div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Note</span>Watch the sign. f = 1/(x &minus; 1) gives (x &minus; 2)/(x &minus; 1)<sup>2</sup>, which is the <i>negative</i> of the integrand.</p><ol class="steps"><li>Write 2 &minus; x = 1 &minus; (x &minus; 1) and split:<div class="disp"><span class="fr"><span class="n">2 &minus; x</span><span class="d">(x &minus; 1)<sup>2</sup></span></span> = <span class="fr"><span class="n">1</span><span class="d">(x &minus; 1)<sup>2</sup></span></span> &minus; <span class="fr"><span class="n">1</span><span class="d">x &minus; 1</span></span></div></li><li>Take f(x) = &minus;<span class="fr"><span class="n">1</span><span class="d">x &minus; 1</span></span> = <span class="fr"><span class="n">1</span><span class="d">1 &minus; x</span></span>. Then f&prime;(x) = <span class="fr"><span class="n">1</span><span class="d">(x &minus; 1)<sup>2</sup></span></span> and<div class="disp">f(x) + f&prime;(x) = <span class="fr"><span class="n">1</span><span class="d">(x &minus; 1)<sup>2</sup></span></span> &minus; <span class="fr"><span class="n">1</span><span class="d">x &minus; 1</span></span> &nbsp;&#10003;</div></li></ol><p class="ansl"><span class="lbl">Answer</span>f(x) = <span class="fr"><span class="n">1</span><span class="d">1 &minus; x</span></span></p></div>
+</div><div class="item">
+  <div class="imeta"><span class="n">17</span>
+    <span class="src">CISCE Competency booklet</span><span class="qn">Question 92</span>
+    <span class="mk">2 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body">2<sup>x</sup>[f&prime;(x) + f(x) log 2] dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Note</span>The same identity with base 2 in place of e. Note that log 2 appears because <span class="fr"><span class="n">d</span><span class="d">dx</span></span>(2<sup>x</sup>) = 2<sup>x</sup> log 2.</p><ol class="steps"><li>Differentiate the product 2<sup>x</sup> f(x) and compare:<div class="disp"><span class="fr"><span class="n">d</span><span class="d">dx</span></span>[2<sup>x</sup> f(x)] = 2<sup>x</sup> log 2 &middot; f(x) + 2<sup>x</sup> f&prime;(x) = 2<sup>x</sup>[f&prime;(x) + f(x) log 2]</div></li><li>The integrand <i>is</i> that derivative, so integrating undoes it.</li></ol><p class="ansl"><span class="lbl">Answer</span>2<sup>x</sup> f(x) + C</p></div>
+</div>
+
+<h2 class="sec">Looks like by parts, but is not</h2>
+<p class="lead">These have appeared too, and every one of them punishes a candidate who
+starts integrating by parts on reflex. Each is worked in full below, so you can see what the right method is.</p>
+<div class="item nm">
+  <div class="imeta"><span class="n warm">1</span>
+    <span class="src">ISC Board 2023, Question 6(i)</span><span class="mk">2 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body">cos<sup>&minus;1</sup>(sin x) dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Why it is not parts</span>An inverse function times 1 &mdash; the by-parts pattern. But it simplifies away first.</p><ol class="steps"><li>cos<sup>&minus;1</sup>(sin x) = cos<sup>&minus;1</sup>[cos(<span class="fr"><span class="n">&pi;</span><span class="d">2</span></span> &minus; x)] = <span class="fr"><span class="n">&pi;</span><span class="d">2</span></span> &minus; x, valid on the principal branch.</li><li>The integrand is now linear:<div class="disp">I = <span class="ig"><span class="sym">&int;</span><span class="body">(<span class="fr"><span class="n">&pi;</span><span class="d">2</span></span> &minus; x) dx</span></span></div></li></ol><p class="ansl"><span class="lbl">Answer</span><span class="fr"><span class="n">&pi;x</span><span class="d">2</span></span> &minus; <span class="fr"><span class="n">x<sup>2</sup></span><span class="d">2</span></span> + C</p></div>
+</div><div class="item nm">
+  <div class="imeta"><span class="n warm">2</span>
+    <span class="src">ISC Specimen 2024, Question 1(ii)</span><span class="mk">1 mark</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body">sin<sup>&minus;1</sup>(cos x) dx</span></span> = g(x) &minus; <span class="fr"><span class="n">x<sup>2</sup></span><span class="d">2</span></span> + C</div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Why it is not parts</span>The same trap in objective form. The &minus;x<sup>2</sup>/2 in the given answer is the giveaway that the integrand became linear.</p><ol class="steps"><li>sin<sup>&minus;1</sup>(cos x) = <span class="fr"><span class="n">&pi;</span><span class="d">2</span></span> &minus; x.<div class="disp">I = <span class="ig"><span class="sym">&int;</span><span class="body">(<span class="fr"><span class="n">&pi;</span><span class="d">2</span></span> &minus; x) dx</span></span> = <span class="fr"><span class="n">&pi;x</span><span class="d">2</span></span> &minus; <span class="fr"><span class="n">x<sup>2</sup></span><span class="d">2</span></span></div></li><li>Comparing with g(x) &minus; x<sup>2</sup>/2 + C.</li></ol><p class="ansl"><span class="lbl">Answer</span>g(x) = <span class="fr"><span class="n">&pi;x</span><span class="d">2</span></span></p></div>
+</div><div class="item nm">
+  <div class="imeta"><span class="n warm">3</span>
+    <span class="src">ISC Board 2019 Q13 [6] and ISC Specimen 2021 Q9(b) [4]</span><span class="mk">6 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="lim"><span class="hi">&pi;</span><span class="lo">0</span></span><span class="body"><span class="fr"><span class="n">x tan x</span><span class="d">sec x + tan x</span></span> dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Why it is not parts</span>A definite integral with x multiplying a trigonometric function. The method is the reflection property, not parts.</p><ol class="steps"><li>Apply <span class="ig"><span class="sym">&int;</span><span class="lim"><span class="hi">a</span><span class="lo">0</span></span><span class="body">f(x) dx</span></span> = <span class="ig"><span class="sym">&int;</span><span class="lim"><span class="hi">a</span><span class="lo">0</span></span><span class="body">f(a &minus; x) dx</span></span> with a = &pi;. Since tan(&pi; &minus; x) = &minus;tan x and sec(&pi; &minus; x) = &minus;sec x, the fraction is unchanged:<div class="disp">I = <span class="ig"><span class="sym">&int;</span><span class="lim"><span class="hi">&pi;</span><span class="lo">0</span></span><span class="body"><span class="fr"><span class="n">(&pi; &minus; x) tan x</span><span class="d">sec x + tan x</span></span> dx</span></span></div></li><li>Adding the two expressions for I:<div class="disp">2I = &pi; <span class="ig"><span class="sym">&int;</span><span class="lim"><span class="hi">&pi;</span><span class="lo">0</span></span><span class="body"><span class="fr"><span class="n">tan x</span><span class="d">sec x + tan x</span></span> dx</span></span></div></li><li>Simplify the integrand by multiplying through by cos x:<div class="disp"><span class="fr"><span class="n">tan x</span><span class="d">sec x + tan x</span></span> = <span class="fr"><span class="n">sin x</span><span class="d">1 + sin x</span></span> = 1 &minus; <span class="fr"><span class="n">1</span><span class="d">1 + sin x</span></span></div></li><li>and <span class="ig"><span class="sym">&int;</span><span class="lim"><span class="hi">&pi;</span><span class="lo">0</span></span><span class="body"><span class="fr"><span class="n">dx</span><span class="d">1 + sin x</span></span></span></span> = 2, so the bracket gives &pi; &minus; 2.</li></ol><p class="ansl"><span class="lbl">Answer</span>I = <span class="fr"><span class="n">&pi;</span><span class="d">2</span></span>(&pi; &minus; 2) &#8776; 1&middot;793</p></div>
+</div><div class="item nm">
+  <div class="imeta"><span class="n warm">4</span>
+    <span class="src">ISC Specimen 2026, Question 12(ii)</span><span class="mk">6 marks</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="lim"><span class="hi"><span class="fr"><span class="n">3&pi;</span><span class="d">4</span></span></span><span class="lo"><span class="fr"><span class="n">&pi;</span><span class="d">4</span></span></span></span><span class="body"><span class="fr"><span class="n">x</span><span class="d">1 + sin x</span></span> dx</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Why it is not parts</span>Same shape, same method &mdash; the reflection property in the form f(a + b &minus; x).</p><ol class="steps"><li>Here a + b = <span class="fr"><span class="n">&pi;</span><span class="d">4</span></span> + <span class="fr"><span class="n">3&pi;</span><span class="d">4</span></span> = &pi;, and sin(&pi; &minus; x) = sin x, so<div class="disp">I = <span class="ig"><span class="sym">&int;</span><span class="lim"><span class="hi"><span class="fr"><span class="n">3&pi;</span><span class="d">4</span></span></span><span class="lo"><span class="fr"><span class="n">&pi;</span><span class="d">4</span></span></span></span><span class="body"><span class="fr"><span class="n">&pi; &minus; x</span><span class="d">1 + sin x</span></span> dx</span></span></div></li><li>Adding:<div class="disp">2I = &pi; <span class="ig"><span class="sym">&int;</span><span class="lim"><span class="hi"><span class="fr"><span class="n">3&pi;</span><span class="d">4</span></span></span><span class="lo"><span class="fr"><span class="n">&pi;</span><span class="d">4</span></span></span></span><span class="body"><span class="fr"><span class="n">dx</span><span class="d">1 + sin x</span></span></span></span></div></li><li>Rationalise: <span class="fr"><span class="n">1</span><span class="d">1 + sin x</span></span> = <span class="fr"><span class="n">1 &minus; sin x</span><span class="d">cos<sup>2</sup> x</span></span> = sec<sup>2</sup>x &minus; sec x tan x, whose integral is tan x &minus; sec x. Between the limits this gives 2(<span class="rt">&radic;<span class="bar">2</span></span> &minus; 1).</li></ol><p class="ansl"><span class="lbl">Answer</span>I = &pi;(<span class="rt">&radic;<span class="bar">2</span></span> &minus; 1) &#8776; 1&middot;301</p></div>
+</div><div class="item nm">
+  <div class="imeta"><span class="n warm">5</span>
+    <span class="src">ISC Board 2017, Question 1(vi)</span><span class="mk">1 mark</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="lim"><span class="hi"><span class="fr"><span class="n">&pi;</span><span class="d">4</span></span></span><span class="lo">0</span></span><span class="body">log(1 + tan &theta;) d&theta;</span></span></div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Why it is not parts</span>A logarithm, so parts looks tempting. It is the classic property-based definite integral.</p><ol class="steps"><li>Replace &theta; by <span class="fr"><span class="n">&pi;</span><span class="d">4</span></span> &minus; &theta;. Then tan(<span class="fr"><span class="n">&pi;</span><span class="d">4</span></span> &minus; &theta;) = <span class="fr"><span class="n">1 &minus; tan &theta;</span><span class="d">1 + tan &theta;</span></span>, so 1 + tan(<span class="fr"><span class="n">&pi;</span><span class="d">4</span></span> &minus; &theta;) = <span class="fr"><span class="n">2</span><span class="d">1 + tan &theta;</span></span>.<div class="disp">I = <span class="ig"><span class="sym">&int;</span><span class="lim"><span class="hi"><span class="fr"><span class="n">&pi;</span><span class="d">4</span></span></span><span class="lo">0</span></span><span class="body">[log 2 &minus; log(1 + tan &theta;)] d&theta;</span></span> = <span class="fr"><span class="n">&pi;</span><span class="d">4</span></span> log 2 &minus; I</div></li><li>So 2I = <span class="fr"><span class="n">&pi;</span><span class="d">4</span></span> log 2.</li></ol><p class="ansl"><span class="lbl">Answer</span>I = <span class="fr"><span class="n">&pi;</span><span class="d">8</span></span> log 2</p></div>
+</div><div class="item nm">
+  <div class="imeta"><span class="n warm">6</span>
+    <span class="src">ISC Specimen 2022 Semester 2, Question 1(i)</span><span class="mk">1 mark</span></div>
+  <div class="themath"><span class="ig"><span class="sym">&int;</span><span class="body"><span class="fr"><span class="n">(log x)<sup>2</sup></span><span class="d">x</span></span> dx</span></span> = <span class="fr"><span class="n">(log x)<sup>k</sup></span><span class="d">k</span></span> + C&nbsp;&nbsp;&mdash;&nbsp;find k</div>
+  <button class="rev">Show full solution</button>
+  <div class="reveal"><p class="note"><span class="lbl">Why it is not parts</span>A product of a logarithm and something else &mdash; but the &ldquo;something else&rdquo; is exactly the derivative of the logarithm, so it is a substitution.</p><ol class="steps"><li>Put t = log x, so dt = <span class="fr"><span class="n">dx</span><span class="d">x</span></span>.<div class="disp">I = <span class="ig"><span class="sym">&int;</span><span class="body">t<sup>2</sup> dt</span></span> = <span class="fr"><span class="n">t<sup>3</sup></span><span class="d">3</span></span> = <span class="fr"><span class="n">(log x)<sup>3</sup></span><span class="d">3</span></span></div></li></ol><p class="ansl"><span class="lbl">Answer</span>k = 3</p></div>
+</div>
+
+<h2 class="sec">Coverage &mdash; what was searched</h2>
+<div class="tw"><table>
+  <thead><tr><th>Source</th><th>Paper</th><th>By-parts problems</th><th>Where / notes</th></tr></thead>
+  <tbody><tr><td class="grp">Board papers</td><td>2017</td><td class="c">&mdash;</td><td></td></tr><tr><td class="grp"></td><td>2018</td><td class="c"><b>1</b></td><td>Q7</td></tr><tr><td class="grp"></td><td>2019</td><td class="c">&mdash;</td><td></td></tr><tr><td class="grp"></td><td>2020</td><td class="c"><b>1</b></td><td>Q13(a)</td></tr><tr><td class="grp"></td><td>2023</td><td class="c">&mdash;</td><td>OCR</td></tr><tr><td class="grp"></td><td>2024</td><td class="c"><b>1</b></td><td>Q9(i) &middot; OCR</td></tr><tr><td class="grp"></td><td>2025</td><td class="c"><b>1</b></td><td>Q8(ii)</td></tr><tr><td class="grp"></td><td>2025 Improvement</td><td class="c"><b>1</b></td><td>Q9(i) &middot; OCR</td></tr><tr><td class="grp"></td><td>2026</td><td class="c">&mdash;</td><td>OCR</td></tr><tr><td class="grp">Specimen papers</td><td>2018</td><td class="c">&mdash;</td><td></td></tr><tr><td class="grp"></td><td>2021</td><td class="c"><b>1</b></td><td>Q12(a)</td></tr><tr><td class="grp"></td><td>2022 Semester 1</td><td class="c">&mdash;</td><td>no integrals at all</td></tr><tr><td class="grp"></td><td>2022 Semester 2</td><td class="c"><b>2</b></td><td>Q2(b), Q1(iv)</td></tr><tr><td class="grp"></td><td>2023</td><td class="c"><b>2</b></td><td>Q1(xiii), Q5(i)</td></tr><tr><td class="grp"></td><td>2024</td><td class="c"><b>1</b></td><td>Q5(ii) &mdash; the real 2024 paper, see note</td></tr><tr><td class="grp"></td><td>2025</td><td class="c"><b>1</b></td><td>Q5(ii)</td></tr><tr><td class="grp"></td><td>2026</td><td class="c">&mdash;</td><td></td></tr><tr><td class="grp"></td><td>2027</td><td class="c"><b>2</b></td><td>Q18(i)(a), Q18(i)(b)</td></tr><tr><td class="grp">School papers</td><td>Heritage Pre-Board 2016&ndash;17</td><td class="c"><b>1</b></td><td>Q1(e) &middot; OCR</td></tr><tr><td class="grp"></td><td>Heritage First Term 2024&ndash;25</td><td class="c">&mdash;</td><td>Integrals not in that paper's scope</td></tr><tr><td class="grp">Competency</td><td>CISCE booklet</td><td class="c"><b>2</b></td><td>Q10, Q92</td></tr></tbody>
+</table></div>
+
+<div class="panel">
+  <h3 style="color:var(--accent)">Two things found in the folder along the way</h3>
+  <ul>
+    <li><b><code>Specimen-Papers/2024.pdf</code> is a byte-identical duplicate of
+        <code>2023.pdf</code></b> (same MD5, and its own running header reads
+        &ldquo;ISC SPECIMEN QUESTION PAPER 2023&rdquo;). The genuine 2024 specimen is
+        <code>2024-v2.pdf</code>, which is where Q5(ii) above comes from.</li>
+    <li><b><code>Specimen-Papers/2026-v2.pdf</code> is the Class XI paper</b>, not a
+        second Class 12 specimen &mdash; the words &ldquo;CLASS XI&rdquo; appear 27
+        times, and it asks about focal chords, sectors and complex roots. It was
+        excluded from the by-parts count.</li>
+  </ul>
+</div>
+
+<footer>
+  <p><b>How this was compiled.</b> All 23 papers were text-extracted and searched for
+  integral signs and for the words &ldquo;evaluate&rdquo; and
+  &ldquo;integrate&rdquo;. Because PDF extraction loses integrands, every candidate was
+  then read off the rendered page image rather than trusted from the text layer.</p>
+  <p><b>OCR.</b> Five papers are image-only with no text layer &mdash; board 2023, 2024,
+  2026, 2025 Improvement, and the Heritage 2016&ndash;17 pre-board. These were OCR'd,
+  and the OCR is kept as editable text in <code>OCR/</code> so it need not be redone.
+  It is machine output and has not been proofread; the four problems drawn from those
+  papers were each confirmed against the page image.</p>
+  <p><b>Answers.</b> Every method and answer here was checked against a computer algebra
+  system.</p>
+  <p>Rebuild with <code>python3 src/build_byparts.py</code>.</p>
+</footer>
+</div>
+<script>
+document.addEventListener('click', function(ev){
+  var b = ev.target.closest ? ev.target.closest('button') : null;
+  if(!b) return;
+  if(b.classList.contains('rev')){
+    var it = b.closest('.item');
+    var on = !it.classList.contains('open');
+    it.classList.toggle('open', on);
+    b.textContent = on ? 'Hide full solution' : 'Show full solution';
+  } else if(b.id === 'all'){
+    document.querySelectorAll('.item').forEach(function(i){
+      i.classList.add('open');
+      var r=i.querySelector('.rev'); if(r) r.textContent='Hide full solution'; });
+  } else if(b.id === 'none'){
+    document.querySelectorAll('.item').forEach(function(i){
+      i.classList.remove('open');
+      var r=i.querySelector('.rev'); if(r) r.textContent='Show full solution'; });
+  }
+});
+</script>
+</body>
+</html>
