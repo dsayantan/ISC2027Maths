@@ -208,8 +208,8 @@ try {
     <button class="themeBtn" id="themeBtn" type="button">Dark</button>
     <div class="eyebrow">The Heritage School &middot; Class 12 &middot; First Term 2026&ndash;27</div>
     <h1>Mathematics First Term</h1>
-    <p class="standfirst">One revision document to work through and three full papers to sit.
-    The revision page keeps every solution hidden behind a button so you can attempt first;
+    <p class="standfirst">Two revision documents to work through and three full papers to sit.
+    Both revision pages keep every solution hidden behind a button so you can attempt first;
     the papers follow the <b>new ISC 2027 pattern</b> and each carries its own answer key.</p>
   </div>
 </header>
@@ -295,6 +295,43 @@ try {
         </p>
       </a>
     </li>
+    <li>
+      <a class="set" href="First-Term-Revision-Paper.html">
+        <span class="kicker">Paper &middot; chapter by chapter</span>
+        <h2>First Term Revision Paper <span class="go">Open &rarr;</span></h2>
+        <p>A <b>revision paper</b> rather than a slide show: 106 questions laid out chapter
+        by chapter, every one picked from the <b>Heritage 2024&ndash;25 First Term paper</b>
+        or from the matching <b>NCERT Exemplar</b> chapter, at the difficulty the First Term
+        paper sets. Each chapter mixes <b>objective and subjective</b> questions and carries
+        at least ten. Solutions stay hidden behind a per-question button, and one switch at
+        the top <b>reveals every solution at once</b>.</p>
+        <p>The number of questions a chapter gets is derived, not guessed: marks were counted
+        question by question in the First Term paper, out-of-syllabus chapters dropped, and
+        the two chapters that paper never touches &mdash; Integrals and Application of
+        Integrals &mdash; given the average of the rest. The page shows the whole table.</p>
+        <!-- Counts below are the real per-chapter totals; recompute with
+             python3 src/build_revpaper.py, which prints the totals it wrote. -->
+        <div class="chips">
+          <span class="chip"><b>11</b> Relations &amp; Functions</span>
+          <span class="chip"><b>11</b> Inverse Trig</span>
+          <span class="chip"><b>11</b> Matrices</span>
+          <span class="chip"><b>10</b> Determinants</span>
+          <span class="chip"><b>15</b> Continuity &amp; Differentiability</span>
+          <span class="chip"><b>13</b> Applications of Derivatives</span>
+          <span class="chip"><b>12</b> Integrals</span>
+          <span class="chip"><b>12</b> Application of Integrals</span>
+          <span class="chip"><b>11</b> Linear Programming</span>
+        </div>
+        <p class="stats">
+          <span><b>106</b> questions</span> <span class="sep">&middot;</span>
+          <span><b>48</b> objective, <b>58</b> subjective</span> <span class="sep">&middot;</span>
+          <span><b>9</b> chapters</span> <span class="sep">&middot;</span>
+          <span>reveal one, or reveal all</span> <span class="sep">&middot;</span>
+          <span>every answer machine-checked</span> <span class="sep">&middot;</span>
+          <span>printing reveals everything</span>
+        </p>
+      </a>
+    </li>
   </ul>
 
   <div class="section-label">Sourced from the papers</div>
@@ -304,6 +341,35 @@ try {
   competency booklet &mdash; so you can see exactly how a topic has been set.</p>
 
   <ul class="sets">
+    <li>
+      <a class="set" href="Integration-Formulas.html">
+        <span class="kicker">Reference &middot; click a formula, read its proof</span>
+        <h2>Integration Formulas <span class="go">Open &rarr;</span></h2>
+        <p>Every standard integral in the <b>Summary at the end of NCERT Class XII
+        Mathematics Part II, Chapter 7</b> &mdash; all 29 of them, in the Summary's own
+        order and grouping, nothing added and nothing left out. <b>Click a formula and
+        its proof opens in the panel beside it</b>; click another and that proof takes
+        its place.</p>
+        <p>The proofs are not just verification: each one shows how the formula is
+        <i>got</i> &mdash; the substitution, the partial fractions, the multiplier that
+        makes &int;sec&thinsp;x&thinsp;dx work, the parts-with-1 trick behind the three
+        radical integrals &mdash; and then differentiates the answer back.</p>
+        <div class="chips">
+          <span class="chip"><b>14</b> standard integrals</span>
+          <span class="chip"><b>4</b> by substitution</span>
+          <span class="chip"><b>6</b> special functions</span>
+          <span class="chip"><b>2</b> by parts</span>
+          <span class="chip"><b>3</b> special types</span>
+        </div>
+        <p class="stats">
+          <span><b>29</b> formulas</span> <span class="sep">&middot;</span>
+          <span>proof opens beside the list</span> <span class="sep">&middot;</span>
+          <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> to walk them</span>
+          <span class="sep">&middot;</span>
+          <span>every one differentiated back</span>
+        </p>
+      </a>
+    </li>
     <li>
       <a class="set" href="Integration-By-Parts-From-Papers.html">
         <span class="kicker">Index &middot; integrals</span>
@@ -324,6 +390,33 @@ try {
           <span>1 to 6 marks</span> <span class="sep">&middot;</span>
           <span>2016&ndash;17 to 2027</span> <span class="sep">&middot;</span>
           <span>full solutions</span> <span class="sep">&middot;</span>
+          <span>machine-checked</span>
+        </p>
+      </a>
+    </li>
+    <li>
+      <a class="set" href="Integration-From-ISC-Papers.pdf">
+        <span class="kicker">PDF &middot; questions then solutions</span>
+        <h2>Integration &mdash; the complete set <span class="go">Open &rarr;</span></h2>
+        <p>Every integration question &mdash; indefinite, definite and area &mdash;
+        from the <b>ISC specimen papers 2018&ndash;2027</b>, the <b>CISCE competency
+        booklet</b> and the <b>Heritage School</b> papers. Grouped by the method that
+        solves them rather than by paper, and kept deliberately spare &mdash; just the
+        problem and its mark value. Part 1 is the questions; <b>Part 2 gives a complete worked solution for
+        every one</b>, and a source index at the end says which paper each came from.</p>
+        <div class="chips">
+          <span class="chip"><b>12</b> Substitution &amp; standard forms</span>
+          <span class="chip"><b>5</b> Partial fractions</span>
+          <span class="chip"><b>12</b> By parts</span>
+          <span class="chip"><b>10</b> Trigonometric</span>
+          <span class="chip"><b>15</b> Definite by properties</span>
+          <span class="chip"><b>4</b> Modulus &amp; greatest integer</span>
+          <span class="chip"><b>10</b> Area under curves</span>
+        </div>
+        <p class="stats">
+          <span><b>68</b> questions</span> <span class="sep">&middot;</span>
+          <span><b>17</b> pages</span> <span class="sep">&middot;</span>
+          <span>solutions at the end</span> <span class="sep">&middot;</span>
           <span>machine-checked</span>
         </p>
       </a>
